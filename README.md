@@ -1,1 +1,1 @@
-Simple App to detect whether or not all ' { } { } [ ] ' are closed correctly within a piece of code. It will ignore all other characters. 
+Simple App to detect whether or not all ' { } { } [ ] ' are closed correctly within a piece of code using a Stack. It will ignore all other characters. 
