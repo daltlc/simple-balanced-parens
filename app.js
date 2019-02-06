@@ -3,9 +3,9 @@
 // *********************************
 // USE A STACK!
 
-var tokens = [ ['{','}'] , ['[',']'] , ['(',')'] ];
+let tokens = [ ['{','}'] , ['[',']'] , ['(',')'] ];
 
-var btn = document.getElementById('btn');
+let btn = document.getElementById('btn');
 btn.addEventListener('click', isBalanced);
 
 document.getElementById("input-one").addEventListener("keyup", function(event) {
@@ -16,8 +16,8 @@ document.getElementById("input-one").addEventListener("keyup", function(event) {
 });
 
 // *** Check if character is an opening bracket ***
-function isOpenParenthesis(parenthesisChar) {
-  for (var j = 0; j < tokens.length; j++) {
+let isOpenParenthesis = (parenthesisChar) => {
+  for (let j = 0; j < tokens.length; j++) {
     if (tokens[j][0] === parenthesisChar) {
       return true;
     }
@@ -26,8 +26,8 @@ function isOpenParenthesis(parenthesisChar) {
 }
 
 // *** Check if opening bracket matches closing bracket ***
-function matches(topOfStack, closedParenthesis) {
-  for (var k = 0; k < tokens.length; k++) {
+let matches = (topOfStack, closedParenthesis) => {
+  for (let k = 0; k < tokens.length; k++) {
     if (tokens[k][0] === topOfStack && tokens[k][1] === closedParenthesis) {
       return true;
     }
@@ -36,8 +36,8 @@ function matches(topOfStack, closedParenthesis) {
 }
 
 // *** Checks if item is any sort of paranthesis ***
-function isParanthesis(char) {
-  var str = '{}[]()';
+let isParanthesis = (char) => {
+  let str = '{}[]()';
   if (str.indexOf(char) > -1) {
     return true;
   } else {
@@ -46,10 +46,10 @@ function isParanthesis(char) {
 }
 
 // *** Prints answer of the string to the HTML page  ***
-function printToScreen(bool) {
-  var parensStr = document.getElementById('input-one');
-  var inputStr = parensStr.value
-  var answer = document.getElementById('answer');
+let printToScreen = (bool) => {
+  let parensStr = document.getElementById('input-one');
+  let inputStr = parensStr.value
+  let answer = document.getElementById('answer');
   if (bool) {
     answer.innerHTML = `Nice! Your string <div class='bold'>\" ${inputStr}\ "</div> is <span class='bolder-too'>balanced</span>!`;
   } else {
@@ -58,15 +58,15 @@ function printToScreen(bool) {
 }
 
 // *** We excute this function upon the event ***
-function isBalanced() {
-  var parensStr = document.getElementById('input-one');
-  var inputStr = parensStr.value
+let isBalanced = () => {
+  let parensStr = document.getElementById('input-one');
+  let inputStr = parensStr.value
   if (inputStr === null) { printToScreen(true); }
 
-  var expression = inputStr.split('');
-  var stack = [];
+  let expression = inputStr.split('');
+  let stack = [];
 
-  for (var i = 0; i < expression.length; i++) {
+  for (let i = 0; i < expression.length; i++) {
     if (isParanthesis(expression[i])) {
       if (isOpenParenthesis(expression[i])) {
         stack.push(expression[i]);
@@ -74,7 +74,7 @@ function isBalanced() {
         if (stack.length === 0) {
           return printToScreen(false);
         }
-        var top = stack.pop(); // pop off the top element from stack
+        let top = stack.pop(); // pop off the top element from stack
         if (!matches(top, expression[i])) {
           return printToScreen(false);
         }
@@ -82,7 +82,7 @@ function isBalanced() {
     }
   }
 
-  var returnValue = stack.length === 0 ? true : false;
+  let returnValue = stack.length === 0 ? true : false;
   printToScreen(returnValue)
 
 }
